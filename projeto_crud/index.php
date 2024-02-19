@@ -9,34 +9,36 @@
 </head>
 
 <body>
-    <div class="container">
-        <?php if (!empty($_GET['msgErro'])) { ?>
-            <div class="alert alert-warning" role="alert">
-                <?php echo $_GET['msgErro']; ?>
-            </div>
-        <?php } ?>
-        <?php if (!empty($_GET['msgSucesso'])) { ?>
-            <div class="alert alert-success" role="alert">
-                <?php echo $_GET['msgSucesso']; ?>
-            </div>
-        <?php } ?>
-        
-        <h1>Olá, seja bem-vindo(a)!!</h1>
-        <form action="processa_login.php" method="post">
-            <div class="col-4">
-                <label for="email">E-mail</label>
-                <input type="email" name="email" id="email" class="form-control">
-            </div>
-            <div class="col-4">
-                <label for="senha">Senha</label>
-                <input type="password" name="senha" id="senha" class="form-control">
-            </div><br />
+    <center>
+        <div class="container">
+            <?php if (!empty($_GET['msgErro'])) { ?>
+                <div class="alert alert-warning" role="alert">
+                    <?php echo $_GET['msgErro']; ?>
+                </div>
+            <?php } ?>
+            <?php if (!empty($_GET['msgSucesso'])) { ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $_GET['msgSucesso']; ?>
+                </div>
+            <?php } ?>
 
-            <button type="submit" name="enviarDados" class="btn btn-primary">Entrar</button>
+            <h1>Olá, seja bem-vindo(a)!!</h1>
+            <form action="processa_login.php" method="post">
+                <div class="col-4">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email" class="form-control">
+                </div>
+                <div class="col-4">
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" class="form-control">
+                </div><br />
 
-            <a href="cad_usuario.php" class="btn btn-warning">Cadastrar-se</a>
-        </form>
-    </div>
+                <button type="submit" name="enviarDados" class="btn btn-primary">Entrar</button>
+
+                <a href="cad_usuario.php" class="btn btn-warning">Cadastrar-se</a>
+            </form>
+        </div>
+    </center>
 </body>
 
 </html>

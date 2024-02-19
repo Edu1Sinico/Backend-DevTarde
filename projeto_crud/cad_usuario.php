@@ -15,7 +15,8 @@ Telefone
 E-mail
 Senha
 -->
-    <div class="container">
+    <center>
+        <div class="container">
 
             <h1>Cadastrar Novo(a) Usuário(a)</h1>
             <form action="processa_usuario.php" method="post">
@@ -47,6 +48,7 @@ Senha
                 <a href="index.php" class="btn btn-danger">Cancelar</a>
             </form>
         </div>
+    </center>
 </body>
 
 </html>
