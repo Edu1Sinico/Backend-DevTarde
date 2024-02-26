@@ -45,9 +45,67 @@ if (!empty($_POST)) {
             die($e->getMessage());
             header("Location: index_logado.php?msgErro=Falha ao cadastrar anúncio..");
         }
-    }
-    // Inserir código do Alterar e Excluir
-    else {
+    } elseif ($_POST['enviarDados'] == 'ALT') { // ALTERAR!!!
+        /* Implementação do update aqui.. */
+        // Construir SQL para update
+        try {
+            $sql = "UPDATE
+        anuncio
+        SET
+        fase = :fase,
+        tipo = :tipo,
+        porte = :porte,
+        pelagem_cor = :pelagem_cor,
+        raca = :raca,
+        sexo = :sexo,
+        observacao = :observacao
+        WHERE
+        id = :id_anuncio AND
+        email_usuario = :email";
+
+            // Definir dados para SQL
+            $dados = array(
+                ':id_anuncio' => $_POST['id_anuncio'],
+                ':fase' => $_POST['fase'],
+                ':tipo' => $_POST['tipo'],
+                ':porte' => $_POST['porte'],
+                ':pelagem_cor' => $_POST['pelagemCor'],
+                ':raca' => $_POST['raca'],
+                ':sexo' => $_POST['sexo'],
+                ':observacao' => $_POST['observacao'],
+                ':email' => $_SESSION['email']
+            );
+            $stmt = $pdo->prepare($sql);
+            // Executar SQL
+            if ($stmt->execute($dados)) {
+                header("Location: index_logado.php?msgSucesso=Alteração realizada com sucesso!!");
+            } else {
+                header("Location: index_logado.php?msgErro=Falha ao ALTERAR anúncio..");
+            }
+        } catch (PDOException $e) {
+            //die($e->getMessage());
+            header("Location: index_logado.php?msgErro=Falha ao ALTERAR anúncio..");
+            // Inserir código do Alterar e Excluir
+        }
+    } elseif ($_POST['enviarDados'] == 'DEL') { // EXCLUIR!!!
+        /** Implementação do excluir aqui.. */
+        // id_anuncio ok
+        // e-mail usuário logado ok
+        try {
+            $sql = "DELETE FROM anuncio WHERE id = :id_anuncio AND email_usuario = :email";
+            $stmt = $pdo->prepare($sql);
+            $dados = array(':id_anuncio' => $_POST['id_anuncio'], ':email' =>
+            $_SESSION['email']);
+            if ($stmt->execute($dados)) {
+                header("Location: index_logado.php?msgSucesso=Anúncio excluído com sucesso!!");
+            } else {
+                header("Location: index_logado.php?msgSucesso=Falha ao EXCLUIR anúncio..");
+            }
+        } catch (PDOException $e) {
+            //die($e->getMessage());
+            header("Location: index_logado.php?msgSucesso=Falha ao EXCLUIR anúncio..");
+        }
+    } else {
         header("Location: index_logado.php?msgErro=Erro de acesso (Operação não definida).");
     }
 } else {
@@ -55,4 +113,3 @@ if (!empty($_POST)) {
 }
 die();
 // Redirecionar para a página inicial (index_logado) c/ mensagem erro/sucesso
-?>
