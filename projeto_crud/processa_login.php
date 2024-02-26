@@ -46,7 +46,7 @@ if (!empty($_POST)) {
         die($e->getMessage());
     }
 } else {
-    header("Location: index.php?msgErro=Você não tem permissão para acessar esta página..");
+    header("Location: index.php?msgErro=Você não tem permissão para acessar esta página.");
 }
 die();
 ?>
